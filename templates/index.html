@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Whistler Snow AI</title>
+</head>
+<body>
+  <h1>Whistler Snow App</h1>
+
+  <h2>AIで降雪量を予測（LinearRegression）</h2>
+  <form method="POST">
+    <p>
+      日付（YYYY-MM-DD）：
+      <input type="text" name="date" value="{{ date_value }}" />
+      <button type="submit">予測する</button>
+    </p>
+    <p style="color:#666; font-size: 13px;">
+      ※ 入力を空にすると「明日」を予測します。<br>
+      ※ 学習データ最終日：{{ last_train_date }}<br>
+      ※ モデル誤差の目安（MAE）：{{ mae }} cm
+    </p>
+  </form>
+
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+
+  {% if pred_date %}
+    <h3>予測結果</h3>
+    <p>日付：{{ pred_date }}</p>
+    <p><b>予測降雪量：{{ pred_snow }} cm</b></p>
+  {% endif %}
+
+</body>
+</html>
